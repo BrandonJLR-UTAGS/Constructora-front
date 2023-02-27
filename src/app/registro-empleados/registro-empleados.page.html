@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nuevo Empledo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-content>
+
+        <!-- (keyup.enter)="RegistrarEmpleado()" -->
+        <form [formGroup]="formRegEmpleados" >
+
+
+          <h2>Datos Personales</h2>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="nombre"></ion-input>
+          </ion-item>
+<br>
+          <h2>Datos de contacto</h2>
+          <ion-item>
+            <ion-label position="floating">Correo</ion-label>
+            <ion-input type="email"  formControlName="correo" ngModel email></ion-input>
+            <ion-note slot="helper">Ingresa un correo</ion-note>
+            <ion-note slot="error">correo invalido</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Telefono</ion-label>
+            <ion-input formControlName="numeroTelefono" type="tel"></ion-input>
+          </ion-item>
+<br>
+            <h2>Datos laborales</h2>
+
+            <ion-item>
+              <ion-label position="floating">Tipo de empleado</ion-label>
+              <ion-input formControlName="tipoEmpleado"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="contrasena"></ion-input>
+            </ion-item>
+
+      <ion-button  >
+        Ingresar
+      </ion-button>
+
+        </form>
+
+      </ion-card-content>
+
+    </ion-card-header>
+  </ion-card>
+
+
+
+
+</ion-content>
