@@ -5,13 +5,14 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
-    // loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    pathMatch: 'full',
+
   },
-  // {
-  //   path: 'cronograma',
-  //   loadChildren: () => import('./cronograma/cronograma.module').then( m => m.CronogramaPageModule)
-  // },
+  {
+    path: 'cronograma',
+    loadChildren: () => import('./cronograma/cronograma.module').then( m => m.CronogramaPageModule),
+
+  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -24,10 +25,14 @@ const routes: Routes = [
     path: 'registro-empleados',
     loadChildren: () => import('./registro-empleados/registro-empleados.module').then( m => m.RegistroEmpleadosPageModule)
   },
-  // {
-  //   path: 'tab4',
-  //   loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
-  // }
+  {
+    path: 'proyectos',
+    loadChildren: () => import('./proyectos/proyectos.module').then( m => m.ProyectosPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  }
 
 ];
 @NgModule({

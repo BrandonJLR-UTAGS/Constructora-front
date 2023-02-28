@@ -23,13 +23,14 @@ const routes: Routes = [
         path: 'tab4',
         loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
       },
-      {
-        path: 'cronograma',
-        loadChildren: () => import('../cronograma/cronograma.module').then(m => m.CronogramaPageModule)
-      },
-
-
-
+      // {
+      //   path: 'cronograma',
+      //   loadChildren: () => import('../cronograma/cronograma.module').then(m => m.CronogramaPageModule)
+      // },
+      // {
+      //   path: 'proyectos',
+      //   loadChildren: () => import('../proyectos/proyectos.module').then(m => m.ProyectosPageModule)
+      // },
       {
         path: '',
         redirectTo: '/tabs/tab1',

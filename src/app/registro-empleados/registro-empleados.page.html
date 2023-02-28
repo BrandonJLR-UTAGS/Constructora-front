@@ -13,8 +13,8 @@
     <ion-card-header>
       <ion-card-content>
 
-        <!-- (keyup.enter)="RegistrarEmpleado()" -->
-        <form [formGroup]="formRegEmpleados" >
+        <!--  -->
+        <form [formGroup]="formRegEmpleados" (keyup.enter)="RegistrarEmpleado()">
 
 
           <h2>Datos Personales</h2>
@@ -46,8 +46,8 @@
               <ion-input formControlName="contrasena"></ion-input>
             </ion-item>
 
-      <ion-button  >
-        Ingresar
+      <ion-button (click)="RegistrarEmpleado()" >
+        Registrar
       </ion-button>
 
         </form>
