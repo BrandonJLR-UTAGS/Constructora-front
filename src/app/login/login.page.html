@@ -6,12 +6,17 @@
 
 <ion-content>
 
+
+
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Login</ion-card-title>
+      <ion-card-title>Bienvenido</ion-card-title>
+      <ion-thumbnail >
+      <img  src="https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" />
+    </ion-thumbnail>
     </ion-card-header>
     <ion-card-content>
-      Bienvenido
+
       <form [formGroup]="formLogin">
         <ion-item fill="solid">
           <ion-label position="floating">Correo</ion-label>
@@ -34,14 +39,4 @@
   </ion-card>
 </ion-content>
 
-<footer>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/registro-empleados']">
-        Registrarse
-      </ion-button>
 
-    </ion-buttons>
-
-  </ion-toolbar>
-</footer>
