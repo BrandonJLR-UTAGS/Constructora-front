@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 
-
-
 @Component({
   selector: 'app-registro-empleados',
   templateUrl: './registro-empleados.page.html',
@@ -11,15 +9,19 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroEmpleadosPage implements OnInit {
 
+  public imagen: any = []
+
   formRegEmpleados: FormGroup;
   constructor(public fb:FormBuilder,
     public alertController: AlertController ){
     this.formRegEmpleados= this.fb.group({
       'nombre':new FormControl("",Validators.required),
+      'FotoEmpleado':new FormControl("",Validators.nullValidator),
       'correo':new FormControl("",Validators.required),
       'contrasena':new FormControl("",Validators.required),
       'numeroTelefono':new FormControl("",Validators.required),
-      'tipoEmpleado':new FormControl("",Validators.required)
+      'tipoEmpleado':new FormControl("",Validators.required),
+      'Area': new FormControl("",Validators.required)
     });
   }
 
@@ -27,6 +29,16 @@ export class RegistroEmpleadosPage implements OnInit {
 
   ngOnInit() {
   }
+
+  CargarImagen(event: any){
+    const imagenCargada = event.target.files[0]
+    this.imagen.push(imagenCargada)
+
+    console.log(event.target.files)
+
+
+  }
+
   async RegistrarEmpleado(){
     var f=this.formRegEmpleados.value;
     if(this.formRegEmpleados.invalid){

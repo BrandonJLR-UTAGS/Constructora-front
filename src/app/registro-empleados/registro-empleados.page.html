@@ -13,17 +13,34 @@
     <ion-card-header>
       <ion-card-content>
 
-        <!--  -->
         <form [formGroup]="formRegEmpleados" (keyup.enter)="RegistrarEmpleado()">
 
+          <ion-text color="primary">
 
-          <h2>Datos Personales</h2>
+            <h2>Datos Personales</h2>
+          </ion-text>
+
+          <ion-item>
+            <ion-label position="stacked">Imagen</ion-label>
+            <input (change)="CargarImagen($event)" type="file" formControlName="FotoEmpleado">
+
+            <!-- //Vista previa// -->
+
+            <img [src]="" alt="">
+
+
+          </ion-item>
+
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
             <ion-input formControlName="nombre"></ion-input>
           </ion-item>
 <br>
+         <ion-text color="primary">
+
           <h2>Datos de contacto</h2>
+         </ion-text>
+
           <ion-item>
             <ion-label position="floating">Correo</ion-label>
             <ion-input type="email"  formControlName="correo" ngModel email></ion-input>
@@ -35,12 +52,28 @@
             <ion-input formControlName="numeroTelefono" type="tel"></ion-input>
           </ion-item>
 <br>
-            <h2>Datos laborales</h2>
+<ion-text color="primary">
 
-            <ion-item>
-              <ion-label position="floating">Tipo de empleado</ion-label>
-              <ion-input formControlName="tipoEmpleado"></ion-input>
-            </ion-item>
+  <h2>Datos laborales</h2>
+</ion-text>
+
+          <ion-item>
+            <ion-label>Area</ion-label>
+            <ion-select value="Area" multiple="true" placeholder="Select Pizza">
+              <ion-select-option value="Area 1">Madera</ion-select-option>
+              <ion-select-option value="Area 2">Hierro</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Tipo de Empleado</ion-label>
+            <ion-select value="tipoEmpleado" multiple="false" placeholder="Selecciona">
+              <ion-select-option value="TipEmp 1">Chalan</ion-select-option>
+              <ion-select-option value="TipEmp 2">Dios</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
               <ion-input formControlName="contrasena"></ion-input>
@@ -56,8 +89,4 @@
 
     </ion-card-header>
   </ion-card>
-
-
-
-
 </ion-content>

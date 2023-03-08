@@ -8,9 +8,10 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
+        path: 'proyectos',
+        loadChildren: () => import('../proyectos/proyectos.module').then(m => m.ProyectosPageModule)
       },
+
       {
         path: 'tab2',
         loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
@@ -28,19 +29,15 @@ const routes: Routes = [
         loadChildren: () => import('../cronograma/cronograma.module').then(m => m.CronogramaPageModule)
       },
       {
-        path: 'proyectos',
-        loadChildren: () => import('../proyectos/proyectos.module').then(m => m.ProyectosPageModule)
-      },
-      {
         path: '',
-        redirectTo: 'tabs/tab1',
+        redirectTo: 'tabs/proyectos',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: 'tabs/tab1',
+    redirectTo: 'tabs/proyectos',
     pathMatch: 'full'
   }
 ];

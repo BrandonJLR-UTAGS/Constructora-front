@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nuevo Proyecto </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-content>
+        <form
+          [formGroup]="formRegProyectos"
+          (keyup.enter)="RegistrarProyecto()"
+        >
+          <ion-item>
+            <ion-label position="floating">Nombre del proyecto</ion-label>
+            <ion-input
+              placeholder="Nombre del Proyecto"
+              formControlName="nombre"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Imagen</ion-label>
+            <input (change)="CargarImagen($event)" type="file" formControlName="ImagenProyecto">
+
+            <!-- //Vista previa// -->
+
+            <img [src]="" alt="">
+
+
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label position="stacked">Descripcion</ion-label>
+            <ion-textarea
+              placeholder="Descripcion"
+              [autoGrow]="true"
+              formControlName="descripcion"
+            ></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Presupuesto total: </ion-label>
+            <ion-input
+              placeholder="Presupuesto"
+              formControlName="presupuestoTotal"
+              type="number"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Mano de obra esperado: </ion-label>
+            <ion-input
+              placeholder="Presupuesto"
+              formControlName="presupuestoManoObra"
+              type="number"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Material esperado: </ion-label>
+            <ion-input
+              placeholder="Presupuesto"
+              formControlName="presupuestoMaterial"
+              type="number"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Tiempo del Proyecto: </ion-label>
+            <ion-input
+              placeholder="Semanas"
+              formControlName="TiempoEsperado"
+              type="number"
+            ></ion-input>
+          </ion-item>
+
+          <ion-text color="primary">
+            <h1>Personas a Cargo</h1>
+          </ion-text>
+
+          <ion-item>
+
+            <ion-select value="PersonaCargo" multiple="true" placeholder="Selecciona Personal">
+              <ion-select-option value="Personal 1">Persona 1</ion-select-option>
+              <ion-select-option value="Personal 2">Persoan 2</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+
+          <ion-text color="primary">
+
+            <h1>Areas</h1>
+          </ion-text>
+
+
+
+            <ion-item>
+
+              <ion-select value="Areas" multiple="true" placeholder="Seleciona las Areas">
+                <ion-select-option value="Area 1">Area 1</ion-select-option>
+                <ion-select-option value="Area 2">Area 2</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+
+
+
+
+
+
+
+
+
+          <ion-button (click)="RegistrarProyecto()"> Registrar </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

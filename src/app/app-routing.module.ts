@@ -32,7 +32,11 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },  {
+    path: 'registro-proyectos',
+    loadChildren: () => import('./registro-proyectos/registro-proyectos.module').then( m => m.RegistroProyectosPageModule)
   }
+
 
 ];
 @NgModule({
