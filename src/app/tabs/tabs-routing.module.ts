@@ -11,7 +11,10 @@ const routes: Routes = [
         path: 'proyectos',
         loadChildren: () => import('../proyectos/proyectos.module').then(m => m.ProyectosPageModule)
       },
-
+      {
+        path: 'actividad',
+        loadChildren: () => import('../actividad/actividad.module').then(m  =>  m.ActividadPageModule)
+      },
       {
         path: 'tab2',
         loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
@@ -23,10 +26,6 @@ const routes: Routes = [
       {
         path: 'tab4',
         loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
-      },
-      {
-        path: 'cronograma',
-        loadChildren: () => import('../cronograma/cronograma.module').then(m => m.CronogramaPageModule)
       },
       {
         path: '',
