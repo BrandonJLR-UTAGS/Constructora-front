@@ -9,13 +9,8 @@ const routes: Routes = [
 
   },
   {
-    path: 'cronograma',
-    loadChildren: () => import('./cronograma/cronograma.module').then( m => m.CronogramaPageModule),
-
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    path: 'home',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule),
   },
   {
     path: 'login',
@@ -32,10 +27,19 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'registro-proyectos',
     loadChildren: () => import('./registro-proyectos/registro-proyectos.module').then( m => m.RegistroProyectosPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'actividad',
+    loadChildren: () => import('./actividad/actividad.module').then( m => m.ActividadPageModule)
   }
+
 
 
 ];
