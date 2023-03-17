@@ -1,42 +1,23 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
-
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenido</ion-card-title>
-      <ion-thumbnail >
-      <img  src="https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" />
-    </ion-thumbnail>
-    </ion-card-header>
-    <ion-card-content>
-
-      <form [formGroup]="formLogin">
-        <ion-item fill="solid">
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input formControlName="email" type="email" ngModel email></ion-input>
-          <ion-note slot="helper">Ingresa un correo</ion-note>
-            <ion-note slot="error">correo invalido</ion-note>
-        </ion-item>
-
+  <div class="content">
+    <div class="top">
+      <h1>Bienvenido de vuelta, Ingresa para empezar!</h1>
+      <img src="../../assets/imgs/undraw_under_construction_46pa.png">
+    </div>
+  </div>
+  <form>
+    <div class="form">
+      <ion-label>Usuario / Email</ion-label>
         <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
+          <ion-input id="Email" type="email" placeholder="Ej.correo@empresa.com" name="email"></ion-input>
         </ion-item>
-      </form>
-      <br>
-      <ion-button (click)="ingresar()" >
-        Ingresar
-      </ion-button>
-
-    </ion-card-content>
-  </ion-card>
+        <ion-label>Contraseña</ion-label>
+        <ion-item>
+          <ion-input id="Password" type="password" placeholder="Ej.1234" name="password"></ion-input>
+        </ion-item>
+    </div>
+  </form>
+  <div class="buttons">
+    <ion-button id="login" type="submit" >Ingresar</ion-button>
+  </div>
 </ion-content>
-
-

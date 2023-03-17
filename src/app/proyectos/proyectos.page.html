@@ -1,23 +1,51 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Proyectos
+      Todos los proyectos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-
-
-
-
+  <div class="lienzo">
+    <div id="buscador">
+      <p>Buscar</p>
+      <ion-input><ion-icon name="search-outline" ></ion-icon></ion-input>      
+    </div>
+    <div id="proyectos">
+      <div class="proyecto">
+        <ion-img src="https://ionic-docs-demo-v6.vercel.app/assets/madison.jpg" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+        <div class="informacion">
+          <h3>Proyecto</h3>
+          <p>Descripcion del proyecto</p>
+        </div>
+      </div>
+      <div class="proyecto">
+        <ion-img src="https://ionic-docs-demo-v6.vercel.app/assets/madison.jpg" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+        <div class="informacion">
+          <h3>Proyecto</h3>
+          <p>Descripcion del proyecto,
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+            Descripcion del proyecto
+          </p>
+        </div>
+      </div>
+    </div>
+    <ion-button slot="fixed"><ion-icon name="add-outline"></ion-icon></ion-button>
+  </div>
 </ion-content>
 
 
 
 
-<footer>
+<!-- <footer>
 
 
       <ion-button size="large" [routerLink]="['/registro-proyectos']">
@@ -25,4 +53,4 @@
       </ion-button>
 
 
-</footer>
+</footer> -->
