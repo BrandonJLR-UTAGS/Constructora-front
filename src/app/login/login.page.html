@@ -9,15 +9,15 @@
     <div class="form">
       <ion-label>Usuario / Email</ion-label>
         <ion-item>
-          <ion-input id="Email" type="email" placeholder="Ej.correo@empresa.com" name="email"></ion-input>
+          <ion-input id="Email" type="email" placeholder="Ej.correo@empresa.com" name="email" [(ngModel)]="user.correo"></ion-input>
         </ion-item>
         <ion-label>Contraseña</ion-label>
         <ion-item>
-          <ion-input id="Password" type="password" placeholder="Ej.1234" name="password"></ion-input>
+          <ion-input id="Password" type="password" placeholder="Ej.1234" name="password" [(ngModel)]="user.contrasena"></ion-input>
         </ion-item>
     </div>
   </form>
   <div class="buttons">
-    <ion-button id="login" type="submit" >Ingresar</ion-button>
+    <ion-button id="login" type="submit" (click)="login()">Ingresar</ion-button>
   </div>
 </ion-content>

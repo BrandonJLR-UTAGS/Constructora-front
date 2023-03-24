@@ -13,28 +13,11 @@
       <ion-input><ion-icon name="search-outline" ></ion-icon></ion-input>      
     </div>
     <div id="proyectos">
-      <div class="proyecto">
-        <ion-img src="https://ionic-docs-demo-v6.vercel.app/assets/madison.jpg" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+      <div class="proyecto" *ngFor="let proyecto of proyectos">
+        <ion-img [src]="'http://localhost:3000/' + proyecto.imgProyecto" alt="foto_proyecto"></ion-img>
         <div class="informacion">
-          <h3>Proyecto</h3>
-          <p>Descripcion del proyecto</p>
-        </div>
-      </div>
-      <div class="proyecto">
-        <ion-img src="https://ionic-docs-demo-v6.vercel.app/assets/madison.jpg" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
-        <div class="informacion">
-          <h3>Proyecto</h3>
-          <p>Descripcion del proyecto,
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-            Descripcion del proyecto
-          </p>
+          <h3>{{proyecto.nombre}}</h3>
+          <p>{{proyecto.descripcion}}</p>
         </div>
       </div>
     </div>

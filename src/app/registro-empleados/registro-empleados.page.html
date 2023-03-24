@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -8,85 +8,67 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-
-    <ion-card-header>
-      <ion-card-content>
-
-        <form [formGroup]="formRegEmpleados" (keyup.enter)="RegistrarEmpleado()">
-
-          <ion-text color="primary">
-
-            <h2>Datos Personales</h2>
-          </ion-text>
-
+  <div class="form">
+    <div class="foto">
+      <img (click)="photoInput.click()" alt="profile-picture" [src]="'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="No image">
+      <input type="file" class="d-none" #photoInput>
+    </div>
+    <div class="datos-contacto">
+      <h3>Datos de contacto</h3>
+      <div class="datos">
+        <div class="input">
+          <ion-label>Correo</ion-label>
           <ion-item>
-            <ion-label position="stacked">Imagen</ion-label>
-            <input (change)="CargarImagen($event)" type="file" formControlName="FotoEmpleado">
-
-            <!-- //Vista previa// -->
-
-            <img [src]="" alt="">
-
-
+            <ion-input placeholder="Ex. correo@empresa.com"></ion-input>
           </ion-item>
-
-          <ion-item>
-            <ion-label position="floating">Nombre</ion-label>
-            <ion-input formControlName="nombre"></ion-input>
+        </div>
+        <div class="input">
+          <ion-label>Contraseña</ion-label>
+         <ion-item>
+            <ion-input placeholder="Enter company name"></ion-input>
           </ion-item>
-<br>
-         <ion-text color="primary">
-
-          <h2>Datos de contacto</h2>
-         </ion-text>
-
+        </div>
+        <div class="input">
+          <ion-label>Numero Telefono</ion-label>
           <ion-item>
-            <ion-label position="floating">Correo</ion-label>
-            <ion-input type="email"  formControlName="correo" ngModel email></ion-input>
-            <ion-note slot="helper">Ingresa un correo</ion-note>
-            <ion-note slot="error">correo invalido</ion-note>
+            <ion-input placeholder="Enter company name"></ion-input>
           </ion-item>
+        </div>
+      </div>
+    </div>
+    <div class="area">
+      <div class="datos">
+        <div class="input">
+          <ion-label>Prioridad</ion-label>
           <ion-item>
-            <ion-label position="floating">Telefono</ion-label>
-            <ion-input formControlName="numeroTelefono" type="tel"></ion-input>
-          </ion-item>
-<br>
-<ion-text color="primary">
-
-  <h2>Datos laborales</h2>
-</ion-text>
-
-          <ion-item>
-            <ion-label>Area</ion-label>
-            <ion-select value="Area" multiple="true" placeholder="Select Pizza">
-              <ion-select-option value="Area 1">Madera</ion-select-option>
-              <ion-select-option value="Area 2">Hierro</ion-select-option>
+            <ion-select placeholder="Construccion 1">
+              <ion-select-option value="">No Game Console</ion-select-option>
             </ion-select>
           </ion-item>
-
+        </div>
+        <div class="input">
+          <ion-label>Tipo de empleado</ion-label>
           <ion-item>
-            <ion-label>Tipo de Empleado</ion-label>
-            <ion-select value="tipoEmpleado" multiple="false" placeholder="Selecciona">
-              <ion-select-option value="TipEmp 1">Chalan</ion-select-option>
-              <ion-select-option value="TipEmp 2">Dios</ion-select-option>
+            <ion-select placeholder="Obrero">
+              <ion-select-option value="">No Game Console</ion-select-option>
             </ion-select>
           </ion-item>
-
-
-            <ion-item>
-              <ion-label position="floating">Contraseña</ion-label>
-              <ion-input formControlName="contrasena"></ion-input>
-            </ion-item>
-
-      <ion-button (click)="RegistrarEmpleado()" >
-        Registrar
-      </ion-button>
-
-        </form>
-
-      </ion-card-content>
-
-    </ion-card-header>
-  </ion-card>
+        </div>   
+      </div>
+    </div>
+    <div class="otrosDatos">
+      <h2>Datos personales</h2>
+      <div class ="datos">
+        <div class="input">
+          <ion-label>Dato 1</ion-label>
+          <ion-item>
+            <ion-input placeholder="Algo"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <ion-button>Crear</ion-button>
+    </div>
+  </div>
 </ion-content>
