@@ -26,8 +26,8 @@ export class PersonalService {
     return this.http.get(`${this.url}/PersonalId/${id}`)
   }
 
-  crearPersonal(){
-    // TODO lo que resta de este codigo
+  crearPersonal(data){
+    return this.http.post(`${this.url}/addPersonal`, data)
   }
 
   actualizarPersonal(id){

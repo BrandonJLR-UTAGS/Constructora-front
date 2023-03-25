@@ -8,13 +8,16 @@
   <div class="actividad">
     <div class="datos_de_entrada">
       <div class="datos">
-        <p>No. de proyectos</p><ion-input disabled="true">1</ion-input> 
+        <p>No. de proyectos</p>
+        <ion-input disabled="true">{{proyectosActivos}}</ion-input> 
       </div>
       <div class="datos">
-        <p>No. de gerentes/jefes</p><ion-input [disabled]="true">1</ion-input> 
+        <p>No. de gerentes/jefes</p>
+        <ion-input [disabled]="true">{{jefesOgerentes}}</ion-input> 
       </div>
       <div class="datos">
-        <p>No. empleados(total)</p><ion-input disabled="true">2</ion-input> 
+        <p>No. empleados(total)</p>
+        <ion-input disabled="true">{{totalPersonal}}</ion-input> 
       </div>
     </div>
     <div class="graficas">
@@ -32,7 +35,7 @@
         </div>
         <div class="bottom">
           <ion-item>
-            <ion-badge slot="start" color="warning">0</ion-badge>
+            <ion-badge slot="start" color="primary">0</ion-badge>
             <ion-label>Materiales</ion-label>
           </ion-item>
         </div>
@@ -43,7 +46,8 @@
           [plotOptions]="options.plotOptions"
           [colors]="options.colors"
           [dataLabels]="options.dataLabels"
-          [legend]="options.legend">
+          [legend]="options.legend"
+          [xaxis]="options.xaxis">
         </apx-chart>
         </div>
       </div>
@@ -63,10 +67,8 @@
           <apx-chart
           [chart]="radial.chart" 
           [series]="radial.series"
-          [plotOptions]="radial.plotOptions"
-          [colors]="radial.colors"
-          [dataLabels]="radial.dataLabels"
-          [legend]="radial.legend">
+          [labels]="radial.labels"
+          [colors]="radial.colors">
           </apx-chart>
         </div>
       </div>

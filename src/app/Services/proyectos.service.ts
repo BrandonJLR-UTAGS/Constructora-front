@@ -22,7 +22,7 @@ export class ProyectosService {
     return this.http.get(`${this.url}/tareasProyecto/${id}`)
   }
 
-  estadisticaPorProyectos(id){
+  estadisticaPorProyecto(id){
     return this.http.get(`${this.url}/estadisticasProyecto/${id}`)
   }
 

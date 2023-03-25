@@ -7,20 +7,20 @@
 <ion-content>
   <div class="personalitation">
     <div class="img-portada">
-      <ion-img src="https://docs-demo.ionic.io/assets/madison.jpg"></ion-img>
+      <ion-img [src]="'http://localhost:3000/' + usuario.imgPortada || 'https://docs-demo.ionic.io/assets/madison.jpg'"></ion-img>
     </div>
     <div class="img-profile">
-      <img src="https://docs-demo.ionic.io/assets/madison.jpg">
+      <img [src]="'http://localhost:3000/' + usuario.imgPerfil || 'https://docs-demo.ionic.io/assets/madison.jpg'">
     </div>
     <div class="datos-contacto">
       <ion-label>Datos de contacto</ion-label>
       <div class="datos">
         <div class="correo">
-          <p><strong>Correo@correo</strong></p>
+          <p><strong>{{usuario.correo}}</strong></p>
           <p>Correo</p>
         </div>
         <div class="numero">
-          <p><strong>44912345678</strong></p>
+          <p><strong>{{usuario.numeroTelefono}}</strong></p>
           <p>Numero de telefono</p>
         </div>
       </div>

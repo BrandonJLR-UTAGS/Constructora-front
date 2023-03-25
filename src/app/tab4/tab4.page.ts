@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { PersonalService } from "../Services/personal.service";
 
 @Component({
   selector: 'app-tab4',
@@ -8,9 +9,29 @@ import { Router } from "@angular/router";
 })
 export class Tab4Page implements OnInit {
 
-  constructor(public router: Router) { }
+  usuario ={
+    correo: '',
+    imgPerfil: '',
+    imgPortada: '',
+    nombre: '',
+    numeroTelefono: '',
+    tipoEmpleado: 0
+  }
+  constructor(public router: Router, public personalS:PersonalService) { }
 
   ngOnInit() {
+    this.obtenerUsuarioPersonal()
+  }
+
+  obtenerUsuarioPersonal(){
+    let id = localStorage.getItem('_id')
+    this.personalS.obtenerPersonalId(id).subscribe((res:any)=>{
+      this.usuario = res.cont
+      
+    },err=>{
+      console.log(err);
+      
+    })
   }
 
   agreagarUsuarios(){

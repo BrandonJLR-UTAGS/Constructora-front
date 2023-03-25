@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProyectosService } from "../Services/proyectos.service";
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -41,185 +42,115 @@ export type ChartOptions = {
 })
 
 export class ActividadPage implements OnInit {
+  gananciasPorProyectos = []
+  gananciasTotales = []
+  manoObraTotales = []
+  materialesTotales = []
+  nombresProyecto = []
+  Totaltareas = []
+  jefesOgerentes: Number
+  personalNormal: Number
+  proyectosActivos: Number
+  totalPersonal: Number
   public options: Partial<ChartOptions>;
   public radial: Partial<ChartOptions>
-  constructor() {
+  constructor(public proyectoS: ProyectosService) {
  
   }
 
   ngOnInit() {
+    this.obtenerEstadisticas()
     this.chart1()
     this.chart2()
   }
 
   chart1(){
     this.options = {
-      series: [
-        {
-          name: 'Actual',
-          data: [
-            {
-              x: '2011',
-              y: 1292,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 1400,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2012',
-              y: 4432,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 5400,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2013',
-              y: 5423,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 5200,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2014',
-              y: 6653,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 6500,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2015',
-              y: 8133,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 6600,
-                  strokeHeight: 13,
-                  strokeWidth: 0,
-                  strokeLineCap: 'round',
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2016',
-              y: 7132,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 7500,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2017',
-              y: 7332,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 8700,
-                  strokeHeight: 5,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            },
-            {
-              x: '2018',
-              y: 6553,
-              goals: [
-                {
-                  name: 'Expected',
-                  value: 7300,
-                  strokeHeight: 2,
-                  strokeDashArray: 2,
-                  strokeColor: '#775DD0'
-                }
-              ]
-            }
-          ]
-        }
-      ],
+      series: [{
+        name:'Mano de obra',
+        data: this.manoObraTotales
+      },{
+        name:'ganancias',
+        data: this.gananciasTotales
+      },{
+        name:'Materiales',
+        data: this.materialesTotales
+      }],
         chart: {
         height: 350,
-        type: 'bar'
+        type: 'bar',
+        stacked: true,
+        toolbar: {
+          show: false
+        },
+        zoom: {
+          enabled: true
+        },
+      },
+      
+      xaxis: {
+        categories: ['test', 'test2.1', 'test3']
       },
       plotOptions: {
         bar: {
-          columnWidth: '60%'
+          columnWidth: '30%'
         }
       },
-      colors: ['#00E396'],
+      colors: ['#DE2B2B', '#2BDE3E', '#1C73CF'],
       dataLabels: {
-        enabled: false
+        enabled: true
       },
       legend: {
         show: true,
         showForSingleSeries: true,
-        customLegendItems: ['Actual', 'Expected'],
+        customLegendItems: ['Mano de obra', 'Ganancias', 'Materiales'],
         markers: {
-          fillColors: ['#00E396', '#775DD0']
+          fillColors: ['#DE2B2B', '#2BDE3E', '#1C73CF']
         }
       }
     };
+
+    console.log(this.manoObraTotales);
+
   }
   
   chart2(){
     this.radial = {
+      series: this.Totaltareas,
       chart: {
-        type: 'radialBar',
-        height: 350,
-      },
-      series: [70],
-      plotOptions: {
-        radialBar: {
-          track: {
-            background: '#c7c7c7',
-            margin: 0,
-            strokeWidth: '70%',
-          },
-          dataLabels: {
-            name: {
-              color: '#fff',
-              offsetY: -10,
-              fontSize: '14px',
-            },
-            value: {
-              color: '#fff',
-              fontSize: '20px',
-              offsetY: 0,
-            },
-          },
-          hollow: {
-            size: '65%',
-          },
-        },
-      },
-      fill: {
-        colors: ['#fd6585'],
-      },
-      labels: ['Tasks'],
-    };
-    
+      type: 'donut',
+    },
+    labels: ['Completadas', 'Pendientes'],
+    colors: ['#2BDE3E', '#DE2B2B'],
+
+  }
+  console.log(this.Totaltareas);
+  
+}
+
+  obtenerEstadisticas(){
+    this.proyectoS.estadisticasGenerales().subscribe((res: any)=>{
+      this.gananciasPorProyectos = res.gananciasPorProyectos
+      this.jefesOgerentes = res.jefesOgerentes
+      this.personalNormal = res.personalNormal
+      this.proyectosActivos = res.proyectosActivos
+      this.totalPersonal = res.totalPersonal
+
+      console.log(res);
+      res.tareasTotales.forEach((element)=>{
+        this.Totaltareas.push(element)
+      })
+
+      this.gananciasPorProyectos.forEach((element)=>{
+        this.gananciasTotales.push(element.ganacias)
+        this.manoObraTotales.push(element.manoObra)
+        this.materialesTotales.push(element.materiales)
+        this.nombresProyecto.push(element.proyecto)
+      })      
+
+    },err=>{
+      console.log(err);
+      
+    })
   }
 }

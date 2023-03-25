@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import {AreaService } from "../Services/area.service";
+import { PersonalService } from "../Services/personal.service";
+
 
 @Component({
   selector: 'app-registro-empleados',
@@ -9,60 +10,70 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroEmpleadosPage implements OnInit {
 
-  public imagen: any = []
-
-  formRegEmpleados: FormGroup;
-  constructor(public fb:FormBuilder,
-    public alertController: AlertController ){
-    this.formRegEmpleados= this.fb.group({
-      'nombre':new FormControl("",Validators.required),
-      'FotoEmpleado':new FormControl("",Validators.nullValidator),
-      'correo':new FormControl("",Validators.required),
-      'contrasena':new FormControl("",Validators.required),
-      'numeroTelefono':new FormControl("",Validators.required),
-      'tipoEmpleado':new FormControl("",Validators.required),
-      'Area': new FormControl("",Validators.required)
-    });
+  photoSelected: string | ArrayBuffer | undefined;
+  file: File;
+  areas=[]
+  usuario = {
+    nombre:'',
+    correo: '',
+    contrasena: '',
+    numeroTelefono: '',
+    area: {
+      nombre: ''
+    },
+    tipoEmpleado:'',
+    imgPerfil: File
   }
 
-
+  constructor(public areaS:AreaService, public personalS:PersonalService ){
+  }
 
   ngOnInit() {
+    this.obtenerAreas()
   }
 
-  CargarImagen(event: any){
-    const imagenCargada = event.target.files[0]
-    this.imagen.push(imagenCargada)
-
-    console.log(event.target.files)
-
-
-  }
-
-  async RegistrarEmpleado(){
-    var f=this.formRegEmpleados.value;
-    if(this.formRegEmpleados.invalid){
-
-        const alert = await this.alertController.create({
-            header: 'Faltan Datos',
-          message: 'Por favor llena todos los Datos',
-          buttons: ['Aceptar']
-        });
-
-        await alert.present();
-        return;
-      }
-
-     var empleado = {
-      nombre: f.nombre,
-      correo: f.correo,
-      contrasena: f.contrasena,
-      numeroTelefono: f.numeroTelefono,
-      tipoEmpleado: f.tipoEmpleado
-     }
-
-     localStorage.setItem('empleado',JSON.stringify(empleado));
+  onPhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+      console.log(this.file);
+      
+      // image preview
+      const reader = new FileReader();
+      reader.onload = (e) => this.photoSelected = reader.result as string;
+      reader.readAsDataURL(this.file);
     }
+  }
+
+  obtenerAreas(){
+    this.areaS.obtenerAreas().subscribe((res: any)=>{
+     this.areas = res.cont
+      console.log(this.areas);
+      
+    },err=>{
+      console.log(err);
+      
+    })
+  }
+
+  crearUsuario(){
+    const nuevoUsuario = new FormData()
+    nuevoUsuario.append('nombre', this.usuario.nombre)
+    nuevoUsuario.append('correo', this.usuario.correo)
+    nuevoUsuario.append('contrasena', this.usuario.contrasena)
+    nuevoUsuario.append('numeroTelefonoString', this.usuario.numeroTelefono)
+    nuevoUsuario.append('area', this.usuario.area.nombre)
+    nuevoUsuario.append('tipoEmpleado', this.usuario.tipoEmpleado)
+    nuevoUsuario.append('imgPerfil', this.file)
+
+    this.personalS.crearPersonal(nuevoUsuario).subscribe((res:any)=>{
+      console.log(res);
+      
+    },err=>{
+      console.log(err);
+      
+    })
+    
+  }
   }
 
 
