@@ -18,6 +18,10 @@ export class ProyectosService {
     return this.http.get(`${this.url}/proyectoActivo`)
   }
 
+  obtenerProyectoId(id){
+    return this.http.get(`${this.url}/proyecto/${id}`)
+  }
+
   obtenerTareasProyecto(id){
     return this.http.get(`${this.url}/tareasProyecto/${id}`)
   }

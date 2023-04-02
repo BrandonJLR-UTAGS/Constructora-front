@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { PersonalService } from "../Services/personal.service";
+import { AreaService } from "../Services/area.service";
+import { ProyectosService } from '../Services/proyectos.service';
 
 @Component({
   selector: 'app-registro-proyectos',
@@ -9,42 +10,109 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroProyectosPage implements OnInit {
 
-  public imagen: any = []
-
-  formRegProyectos: FormGroup;
-  constructor(public fb:FormBuilder,
-     public AlertController: AlertController) {
-      this.formRegProyectos= this.fb.group({
-        'nombre': new FormControl("", Validators.required),
-        'ImagenProyecto':new FormControl("",Validators.nullValidator),
-        'descripcion': new FormControl("",Validators.required),
-        'presupuestoTotal': new FormControl("",Validators.required),
-        'presupuestoManoObra': new FormControl("",Validators.required),
-        'presupuestoMaterial': new FormControl("",Validators.required),
-        'TiempoEsperado': new FormControl("",Validators.required),
-        'PersonaCargo': new FormControl("",Validators.required),
-        'Areas':new FormControl("",Validators.required)
-
-
-
-    });
+  photoSelected: string | ArrayBuffer | undefined;
+  file: File;
+  jefes = []
+  area = []
+  idsJefes = []
+  idArea= ''
+  nombreJefes = []
+  nombreArea = ''
+  proyecto = {
+    nombre: '',
+    descripcion: '',
+    imgProyecto: '',
+    presupuestoTotal: '',
+    manoObra: '',
+    materialesEsperados: '',
+    tiempoProyectoSemanas: '',
+    personasCargo: [],
+    areaAsginada: {
+      nombre: '',
+      _id: ''
+    }
+  }
+  constructor(public personalS: PersonalService, public areaS: AreaService, public proyectoS: ProyectosService) {
   }
 
   ngOnInit() {
+    this.obtenerAreas()
+    this.obtenerJefes()
+  } 
+
+  mostrarNombreArea(){
+    this.nombreArea = this.proyecto.areaAsginada.nombre
+    this.idArea = this.proyecto.areaAsginada._id
 
   }
-  CargarImagen(event: any){
-    const imagenCargada = event.target.files[0]
-    this.imagen.push(imagenCargada)
 
-    console.log(event.target.files)
+  mostrarNombreJefes(){
+    this.nombreJefes=[]
+    console.log(this.jefes);
+    this.jefes.forEach(element=>{
+      this.nombreJefes.push(element.nombre)
+      this.idsJefes.push(element._id)
+    })
+    console.log(this.nombreJefes);
+  }
 
+  obtenerJefes(){
+    this.personalS.obtenerPersonalJefe().subscribe((res:any)=>{
+      this.jefes = res.cont
+      console.log(res);
+      
+    })
+  }
 
+  obtenerAreas(){
+    this.areaS.obtenerAreas().subscribe((res: any)=>{
+      this.area = res.cont
+      console.log(this.nombreArea);
+      
+      console.log(res);
+      
+    })
+  }
+  onPhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+      console.log(this.file);
+      
+      // image preview
+      const reader = new FileReader();
+      reader.onload = (e) => this.photoSelected = reader.result as string;
+      reader.readAsDataURL(this.file);
+    }
   }
 
 
-  async RegistrarProyecto(){
+  RegistrarProyecto(){
+    const nuevoProyecto =  new FormData()
+    nuevoProyecto.append('nombre', this.proyecto.nombre)
+    nuevoProyecto.append('descripcion', this.proyecto.descripcion)
+    nuevoProyecto.append('presupuestoTotalString', this.proyecto.presupuestoTotal)
+    nuevoProyecto.append('manoObraString', this.proyecto.manoObra)
+    nuevoProyecto.append('materialesEsperadosString', this.proyecto.materialesEsperados)
+    nuevoProyecto.append('tiempoProyectoSemanasString', this.proyecto.tiempoProyectoSemanas)
+    for (let i = 0; i < this.proyecto.personasCargo.length; i++) {
+      nuevoProyecto.append('personasCargo', this.proyecto.personasCargo[i]._id)
+    }
+    nuevoProyecto.append('areaAsginada', this.idArea)
+    nuevoProyecto.append('image', this.file)
 
+    nuevoProyecto.forEach(element=>{
+      console.log(element);
+      
+    })
+    
+    this.proyectoS.crearProyecto(nuevoProyecto).subscribe((res:any)=>{
+      console.log(res);
+      
+    },err=>{
+      console.log(err);
+      
+    })
+    
   }
 
 }

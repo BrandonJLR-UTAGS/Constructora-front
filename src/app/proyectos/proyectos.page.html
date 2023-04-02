@@ -13,7 +13,7 @@
       <ion-input><ion-icon name="search-outline" ></ion-icon></ion-input>      
     </div>
     <div id="proyectos">
-      <div class="proyecto" *ngFor="let proyecto of proyectos">
+      <div class="proyecto" *ngFor="let proyecto of proyectos" (click)="toInfo(proyecto._id)">
         <ion-img [src]="'http://localhost:3000/' + proyecto.imgProyecto" alt="foto_proyecto"></ion-img>
         <div class="informacion">
           <h3>{{proyecto.nombre}}</h3>

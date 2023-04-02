@@ -28,6 +28,10 @@ export class ProyectosPage implements OnInit{
     })
   }
 
+  toInfo(id){
+    this.router.navigate(['/proyecto-info', id])
+  }
+
 
 
 }

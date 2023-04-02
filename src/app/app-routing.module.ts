@@ -35,10 +35,19 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'actividad',
     loadChildren: () => import('./actividad/actividad.module').then( m => m.ActividadPageModule)
+  },
+  {
+    path: 'proyecto-info/:id',
+    loadChildren: () => import('./proyecto-info/proyecto-info.module').then( m => m.ProyectoInfoPageModule)
+  },  {
+    path: 'crear-area',
+    loadChildren: () => import('./crear-area/crear-area.module').then( m => m.CrearAreaPageModule)
   }
+
 
 
 
