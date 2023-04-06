@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>
-      Todos los proyectos
+      {{tittle}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,10 +10,10 @@
   <div class="lienzo">
     <div id="buscador">
       <p>Buscar</p>
-      <ion-input><ion-icon name="search-outline" ></ion-icon></ion-input>      
+      <ion-input [(ngModel)]="textoDeBusqueda"><ion-icon name="search-outline" ></ion-icon></ion-input>      
     </div>
     <div id="proyectos">
-      <div class="proyecto" *ngFor="let proyecto of proyectos" (click)="toInfo(proyecto._id)">
+      <div class="proyecto" *ngFor="let proyecto of proyectos | busqueda: textoDeBusqueda " (click)="toInfo(proyecto._id)">
         <ion-img [src]="'http://localhost:3000/' + proyecto.imgProyecto" alt="foto_proyecto"></ion-img>
         <div class="informacion">
           <h3>{{proyecto.nombre}}</h3>

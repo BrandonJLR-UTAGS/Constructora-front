@@ -42,7 +42,7 @@
     <ion-label>Persona asignada</ion-label>
     <ion-item lines="none">
       <ion-select placeholder="Pepe" [(ngModel)]="tarea.personaAsignada">
-        <ion-select-option *ngFor="let jefes of personalJefe" [value]="jefes" >{{jefes.nombre}}</ion-select-option>
+        <ion-select-option *ngFor="let personal of personal" [value]="personal" >{{personal.nombre}}, {{personal.tipoEmpleado}}</ion-select-option>
       </ion-select>
     </ion-item>
   </div>

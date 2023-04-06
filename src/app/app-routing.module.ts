@@ -43,10 +43,15 @@ const routes: Routes = [
   {
     path: 'proyecto-info/:id',
     loadChildren: () => import('./proyecto-info/proyecto-info.module').then( m => m.ProyectoInfoPageModule)
-  },  {
+  },
+  {
     path: 'crear-area',
     loadChildren: () => import('./crear-area/crear-area.module').then( m => m.CrearAreaPageModule)
-  }
+  },  {
+    path: 'tabs-trabajador',
+    loadChildren: () => import('./tabs-trabajador/tabs-trabajador.module').then( m => m.TabsTrabajadorPageModule)
+  },
+
 
 
 

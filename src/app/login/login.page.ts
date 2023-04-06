@@ -14,7 +14,8 @@ export class LoginPage implements OnInit {
 
   user={
     correo : '',
-    contrasena: ''
+    contrasena: '',
+    tipoEmpleado: ''
   }
   constructor(
     public personalS:PersonalService, 
@@ -26,6 +27,8 @@ export class LoginPage implements OnInit {
 
   login(){
     this.personalS.login(this.user).subscribe( async (personal:any) =>{
+      localStorage.setItem('_id', personal.user._id)
+      localStorage.setItem('tipo', personal.user.tipoEmpleado)
       const toast = await this.toastController.create({
         message: 'Logeado con exito',
         duration: 1000,
@@ -33,8 +36,13 @@ export class LoginPage implements OnInit {
         icon: 'checkbox'
       })
       await toast.present();
-      localStorage.setItem('_id', personal.user._id)
-      this.router.navigate(['/home'])
+      if(personal.user.tipoEmpleado == 'Jefe' || personal.user.tipoEmpleado == 'jefe'){
+        this.router.navigate(['/home'])
+      }else{
+        this.router.navigate(['/tabs-trabajador/tareas'])
+      }
+      
+      
 
     },async(err)=>{
       const toast = await this.toastController.create({

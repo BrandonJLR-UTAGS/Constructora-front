@@ -15,7 +15,7 @@ export class Tab4Page implements OnInit {
     imgPortada: '',
     nombre: '',
     numeroTelefono: '',
-    tipoEmpleado: 0
+    tipoEmpleado: ''
   }
   constructor(public router: Router, public personalS:PersonalService) { }
 
@@ -36,6 +36,10 @@ export class Tab4Page implements OnInit {
 
   agreagarUsuarios(){
     this.router.navigate(['/registro-empleados'])
+  }
+
+  agreagarArea(){
+    this.router.navigate(['/crear-area'])
   }
 
 }

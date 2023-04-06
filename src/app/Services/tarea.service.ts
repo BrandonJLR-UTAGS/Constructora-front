@@ -16,6 +16,9 @@ export class TareaService {
   obtenerTareaId(id){
     return this.http.get(`${this.url}/tareas/${id}`)
   }
+  obtenerTareasPersonal(id){
+    return this.http.get(`${this.url}/tareasPersonal/${id}`)
+  }
   crearTarea(data){
     return this.http.post(`${this.url}/crearTarea`, data)
        

@@ -14,6 +14,10 @@ export class ProyectosService {
     return this.http.get(`${this.url}/proyecto`)
   }
 
+  obtenerProyectosPorJefe(id){
+    return this.http.get(`${this.url}/proyectosJefe/${id}`)
+  }
+
   ObtenerProyectosActivos(){
     return this.http.get(`${this.url}/proyectoActivo`)
   }
@@ -32,6 +36,11 @@ export class ProyectosService {
 
   estadisticasGenerales(){
     return this.http.get(`${this.url}/estadisticas`)
+  }
+
+
+  estadisticasJefePorProyecto(id){
+    return this.http.get(`${this.url}/estadisticasJefe/${id}`)
   }
 
   crearProyecto(data){
