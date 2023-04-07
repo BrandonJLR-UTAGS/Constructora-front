@@ -8,16 +8,18 @@
   <div class="actividad">
     <div class="datos_de_entrada">
       <div class="datos">
+
         <p>{{title}}</p>
         <ion-input disabled="true" >{{proyectosActivos}}</ion-input> 
+
       </div>
       <div class="datos">
         <p>No. de gerentes/jefes</p>
-        <ion-input [disabled]="true">{{jefesOgerentes}}</ion-input> 
+        <ion-input [disabled]="true">{{jefesOgerentes}}</ion-input>
       </div>
       <div class="datos">
         <p>No. empleados(total)</p>
-        <ion-input disabled="true">{{totalPersonal}}</ion-input> 
+        <ion-input disabled="true">{{totalPersonal}}</ion-input>
       </div>
     </div>
     <div class="graficas">
@@ -40,8 +42,8 @@
           </ion-item>
         </div>
         <div class="grafica">
-          <apx-chart 
-          [chart]="options.chart" 
+          <apx-chart
+          [chart]="options.chart"
           [series]="options.series"
           [plotOptions]="options.plotOptions"
           [colors]="options.colors"
@@ -65,13 +67,22 @@
         </div>
         <div class="grafica">
           <apx-chart
-          [chart]="radial.chart" 
+          [chart]="radial.chart"
           [series]="radial.series"
           [labels]="radial.labels"
           [colors]="radial.colors">
           </apx-chart>
         </div>
       </div>
+
     </div>
+    <div class="buttons">
+
+      <ion-button [routerLink]="['/cronograma']">
+        Ver Cronograma
+      </ion-button>
+
+    </div>
+
   </div>
 </ion-content>

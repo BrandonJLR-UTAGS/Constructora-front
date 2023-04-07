@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Cronograma</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+  <div>
+    <table>
+
+      <body>
+
+        <ion-row>
+          <ion-col>No.</ion-col>
+          <ion-col>Nombre</ion-col>
+          <ion-col>P/R</ion-col>
+          <ion-col>S1</ion-col>
+          <ion-col>S2</ion-col>
+          <ion-col>Area</ion-col>
+          <ion-col>Persona a cargo</ion-col>
+        </ion-row>
+
+
+
+          <ion-row *ngFor="let dato of datos">
+
+
+          <ion-col>{{dato.numero}}</ion-col>
+          <ion-col>{{dato.nombre}}</ion-col>
+          <ion-col>{{dato.p_r}}</ion-col>
+          <ion-col>{{dato.s1}}</ion-col>
+          <ion-col>{{dato.s2}}</ion-col>
+          <ion-col>{{dato.area}}</ion-col>
+          <ion-col>{{dato.persona}}</ion-col>
+        </ion-row>
+      </body>
+
+    </table>
+
+  </div>
+
+
+</ion-content>
+
+
+<div class="buttons">
+
+  <ion-button [routerLink]="['../home/tabs/tab2']">
+    Crear Tarea
+  </ion-button>
+
+</div>
+
+
+
+
+
+
+
