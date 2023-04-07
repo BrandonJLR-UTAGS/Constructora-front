@@ -1,125 +1,101 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Nuevo Proyecto </ion-title>
+    <ion-title> Agregar Nuevo Proyecto </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-content>
-        <form
-          [formGroup]="formRegProyectos"
-          (keyup.enter)="RegistrarProyecto()"
-        >
-          <ion-item>
-            <ion-label position="floating">Nombre del proyecto</ion-label>
-            <ion-input
-              placeholder="Nombre del Proyecto"
-              formControlName="nombre"
-            ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Imagen</ion-label>
-            <input (change)="CargarImagen($event)" type="file" formControlName="ImagenProyecto">
-
-            <!-- //Vista previa// -->
-
-            <img [src]="" alt="">
-
-
-          </ion-item>
-
-
-          <ion-item>
-            <ion-label position="stacked">Descripcion</ion-label>
-            <ion-textarea
-              placeholder="Descripcion"
-              [autoGrow]="true"
-              formControlName="descripcion"
-            ></ion-textarea>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Presupuesto total: </ion-label>
-            <ion-input
-              placeholder="Presupuesto"
-              formControlName="presupuestoTotal"
-              type="number"
-            ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Mano de obra esperado: </ion-label>
-            <ion-input
-              placeholder="Presupuesto"
-              formControlName="presupuestoManoObra"
-              type="number"
-            ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Material esperado: </ion-label>
-            <ion-input
-              placeholder="Presupuesto"
-              formControlName="presupuestoMaterial"
-              type="number"
-            ></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Tiempo del Proyecto: </ion-label>
-            <ion-input
-              placeholder="Semanas"
-              formControlName="TiempoEsperado"
-              type="number"
-            ></ion-input>
-          </ion-item>
-
-          <ion-text color="primary">
-            <h1>Personas a Cargo</h1>
-          </ion-text>
-
-          <ion-item>
-
-            <ion-select value="PersonaCargo" multiple="true" placeholder="Selecciona Personal">
-              <ion-select-option value="Personal 1">Persona 1</ion-select-option>
-              <ion-select-option value="Personal 2">Persoan 2</ion-select-option>
+  <div class="form">
+    <div class="img-proyecto">
+      <div class="input">
+        <ion-label>Nombre</ion-label>
+        <ion-item lines="none">
+          <ion-input [(ngModel)]="proyecto.nombre"></ion-input>
+        </ion-item>
+      </div>
+      <p>Imagen del proyecto</p>
+      <div class="photo">
+        <img alt="profile-picture" [src]="photoSelected ||'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="No image"
+        (click)="photoInput.click()">
+        <input type="file" class="d-none" (change)="onPhotoSelected($event)" #photoInput>
+      </div>
+    </div>
+    <div class="inputs">
+      <div class="input-area">
+        <ion-label position="floating">Descripcion:</ion-label>
+        <ion-item>
+          <ion-textarea [(ngModel)]="proyecto.descripcion"></ion-textarea>
+        </ion-item>
+      </div>
+      <div class="input">
+        <ion-label>Presupuesto total</ion-label>
+        <ion-item lines="none">
+          <ion-input [(ngModel)]="proyecto.presupuestoTotal"></ion-input>
+        </ion-item>
+      </div>
+      <div class="input">
+        <ion-label>Materiales esperados</ion-label>
+        <ion-item lines="none">
+          <ion-input [(ngModel)]="proyecto.materialesEsperados"></ion-input>
+        </ion-item>
+      </div>
+      <div class="input">
+        <ion-label>Mano de obra esperada</ion-label>
+        <ion-item lines="none">
+          <ion-input [(ngModel)]="proyecto.manoObra"></ion-input>
+        </ion-item>
+      </div>
+      <div class="input">
+        <ion-label>Tiempo del proyecto (en semanas)</ion-label>
+        <ion-item lines="none">
+          <ion-input [(ngModel)]="proyecto.tiempoProyectoSemanas"></ion-input>
+        </ion-item>
+      </div>
+      <div class="all-personal">
+        <div class="personal">
+          <p>Personas a cargo</p>
+          <div class="eleccion">
+            <ion-item lines="none" class="input-select">
+            <ion-select 
+            placeholder="baja" 
+            [multiple]="true"
+            [(ngModel)]="proyecto.personasCargo"
+            (ionDismiss)="mostrarNombreJefes()">
+              <ion-select-option *ngFor="let jefe of jefes" [value]="jefe">{{jefe.nombre}}</ion-select-option>
             </ion-select>
           </ion-item>
-
-
-          <ion-text color="primary">
-
-            <h1>Areas</h1>
-          </ion-text>
-
-
-
-            <ion-item>
-
-              <ion-select value="Areas" multiple="true" placeholder="Seleciona las Areas">
-                <ion-select-option value="Area 1">Area 1</ion-select-option>
-                <ion-select-option value="Area 2">Area 2</ion-select-option>
-              </ion-select>
-            </ion-item>
-
-
-
-
-
-
-
-
-
-
-          <ion-button (click)="RegistrarProyecto()"> Registrar </ion-button>
-        </form>
-      </ion-card-content>
-    </ion-card-header>
-  </ion-card>
+          <ion-item lines="none" class="input-text">
+            <div class="text-area">
+              <p *ngFor="let nombre of nombreJefes">{{nombre}}</p>
+            </div>         
+          </ion-item>
+          </div>
+        </div>
+        <div class="personal">
+          <p>Personas a cargo</p>
+          <div class="eleccion">
+            <ion-item lines="none" class="input-select">
+            <ion-select 
+            placeholder="baja" 
+            [(ngModel)]="proyecto.areaAsginada"
+            (ionDismiss)="mostrarNombreArea()">
+              <ion-select-option *ngFor="let area of area" [value]="area">{{area.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item lines="none" class="input-text">
+            <div class="text-area">
+              <p>{{nombreArea}}</p>
+            </div>         
+          </ion-item>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <ion-button (click)="RegistrarProyecto()">Crear proyecto</ion-button>
+    </div>
+  </div>
 </ion-content>

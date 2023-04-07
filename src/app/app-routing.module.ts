@@ -1,5 +1,4 @@
 
-
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -43,6 +42,18 @@ const routes: Routes = [
     loadChildren: () => import('./actividad/actividad.module').then( m => m.ActividadPageModule)
   },
   {
+    path: 'proyecto-info/:id',
+    loadChildren: () => import('./proyecto-info/proyecto-info.module').then( m => m.ProyectoInfoPageModule)
+  },
+  {
+    path: 'crear-area',
+    loadChildren: () => import('./crear-area/crear-area.module').then( m => m.CrearAreaPageModule)
+  },
+  {
+    path: 'tabs-trabajador',
+    loadChildren: () => import('./tabs-trabajador/tabs-trabajador.module').then( m => m.TabsTrabajadorPageModule)
+  },
+   {
     path: 'resumen-proyecto',
     loadChildren: () => import('./resumen-proyecto/resumen-proyecto.module').then( m => m.ResumenProyectoPageModule)
   },
@@ -50,6 +61,7 @@ const routes: Routes = [
     path: 'cronograma',
     loadChildren: () => import('./cronograma/cronograma.module').then( m => m.CronogramaPageModule)
   }
+
 
 
 

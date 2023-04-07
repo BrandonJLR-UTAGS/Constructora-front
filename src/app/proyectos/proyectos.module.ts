@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BusquedaPipe } from '../Pipes/busqueda.pipe';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -10,7 +11,7 @@ import { ProyectosPage } from './proyectos.page';
 import { ExploreContainerComponentModule } from "../explore-container/explore-container.module";
 
 @NgModule({
-    declarations: [ProyectosPage],
+    declarations: [ProyectosPage,BusquedaPipe],
     imports: [
         CommonModule,
         FormsModule,

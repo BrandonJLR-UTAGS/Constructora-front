@@ -13,7 +13,7 @@ import { ProyectosService } from "../Services/proyectos.service";
 export class Tab2Page implements OnInit{
 
   areas = []
-  personalJefe = []
+  personal = []
   proyectos = []
   files:any
   fecha = ''
@@ -55,11 +55,12 @@ export class Tab2Page implements OnInit{
   }
 
   obtenerJefes(){
-    this.personalS.obtenerPersonalJefe().subscribe((res:any)=>{
-      this.personalJefe = res.cont
-      console.log(this.personalJefe);
+    this.personalS.obtenerTodoPersonal().subscribe((res:any)=>{
+      this.personal = res.cont
+      console.log(this.personal);
       
-    },err =>{
+    }
+    ,err =>{
       console.log(err);
   
     })
