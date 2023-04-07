@@ -3,6 +3,7 @@ import {TareaService } from "../Services/tarea.service";
 import {AreaService } from "../Services/area.service";
 import { PersonalService } from "../Services/personal.service";
 import { ProyectosService } from "../Services/proyectos.service";
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class Tab2Page implements OnInit{
     public tareaS: TareaService, 
     public areaS: AreaService,
     public personalS:PersonalService,
-    public proyectoS: ProyectosService) {}
+    public proyectoS: ProyectosService,
+    private toastController: ToastController) {}
 
   ngOnInit(): void {
     this.obtenerAreas()
@@ -45,35 +47,46 @@ export class Tab2Page implements OnInit{
 
   obtenerAreas(){
     this.areaS.obtenerAreas().subscribe((res:any)=>{
-      this.areas = res.cont
-      console.log(this.areas);
-      
-    },err=>{
-      console.log(err);
+      this.areas = res.cont      
+    },async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
       
     })
   }
 
   obtenerJefes(){
     this.personalS.obtenerTodoPersonal().subscribe((res:any)=>{
-      this.personal = res.cont
-      console.log(this.personal);
-      
+      this.personal = res.cont      
     }
-    ,err =>{
-      console.log(err);
+    ,async(err) =>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
   
     })
   }
 
   obtenerProyectos(){
     this.proyectoS.ObtenerProyectosActivos().subscribe((res:any)=>{
-      this.proyectos = res.cont
-      console.log(this.proyectos);
-      
-    },err=>{
-      console.log(err);
-      
+      this.proyectos = res.cont      
+    },async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();      
     })
   }
 
@@ -91,12 +104,24 @@ export class Tab2Page implements OnInit{
       nuevaTarea.append('archivo', this.files[i])      
     }
     
-    this.tareaS.crearTarea(nuevaTarea).subscribe((res:any)=>{
-      console.log(res);
+    this.tareaS.crearTarea(nuevaTarea).subscribe(async(res:any)=>{
+      const toast = await this.toastController.create({
+        message: 'Tarea creada con exito',
+        duration: 2000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
       
 
-    }, err=>{
-      console.log(err);
+    }, async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
       
     })
   }

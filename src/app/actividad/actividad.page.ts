@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectosService } from '../Services/proyectos.service';
+import { ToastController } from '@ionic/angular';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -54,7 +55,7 @@ export class ActividadPage implements OnInit {
   totalPersonal: Number;
   public options: Partial<ChartOptions>;
   public radial: Partial<ChartOptions>;
-  constructor(public proyectoS: ProyectosService) {}
+  constructor(public proyectoS: ProyectosService, private toastController: ToastController) {}
 
   ngOnInit() {
     this.obtenerEstadisticas();
@@ -91,7 +92,7 @@ export class ActividadPage implements OnInit {
       },
 
       xaxis: {
-        categories: ['test', 'test2.1', 'test3'],
+        categories: this.nombresProyecto,
       },
       plotOptions: {
         bar: {
@@ -111,8 +112,6 @@ export class ActividadPage implements OnInit {
         },
       },
     };
-
-    console.log(this.manoObraTotales);
   }
 
   chart2() {
@@ -124,7 +123,6 @@ export class ActividadPage implements OnInit {
       labels: ['Completadas', 'Pendientes'],
       colors: ['#2BDE3E', '#DE2B2B'],
     };
-    console.log(this.Totaltareas);
   }
 
   obtenerEstadisticas() {
@@ -139,8 +137,7 @@ export class ActividadPage implements OnInit {
           this.personalNormal = res.personalNormal;
           this.proyectosActivos = res.proyectosActivos;
           this.totalPersonal = res.totalPersonal;
-
-          console.log(res);
+          
           res.tareasTotales.forEach((element) => {
             this.Totaltareas.push(element);
           });
@@ -152,8 +149,14 @@ export class ActividadPage implements OnInit {
             this.nombresProyecto.push(element.proyecto);
           });
         },
-        (err) => {
-          console.log(err);
+        async(err) => {
+          const toast = await this.toastController.create({
+            message: err.error.msg,
+            duration: 2000,
+            position: 'bottom',
+            icon: 'close-circle'
+          })
+          await toast.present();
         }
       );
     } else {
@@ -165,7 +168,6 @@ export class ActividadPage implements OnInit {
           this.proyectosActivos = res.proyectosActivos;
           this.totalPersonal = res.totalPersonal;
 
-          console.log(res);
           res.tareasTotales.forEach((element) => {
             this.Totaltareas.push(element);
           });
@@ -177,8 +179,14 @@ export class ActividadPage implements OnInit {
             this.nombresProyecto.push(element.proyecto);
           });
         },
-        (err) => {
-          console.log(err);
+        async (err) => {
+          const toast = await this.toastController.create({
+            message: err.error.msg,
+            duration: 2000,
+            position: 'bottom',
+            icon: 'close-circle'
+          })
+          await toast.present();
         }
       );
     }

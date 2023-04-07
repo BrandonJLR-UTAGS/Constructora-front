@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AreaService } from "../Services/area.service";
 import { PersonalService } from "../Services/personal.service";
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -25,7 +26,10 @@ export class RegistroEmpleadosPage implements OnInit {
     imgPerfil: File
   }
 
-  constructor(public areaS:AreaService, public personalS:PersonalService ){
+  constructor(
+    public areaS:AreaService, 
+    public personalS:PersonalService,
+    private toastController: ToastController ){
   }
 
   ngOnInit() {
@@ -34,9 +38,7 @@ export class RegistroEmpleadosPage implements OnInit {
 
   onPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      this.file = <File>event.target.files[0];
-      console.log(this.file);
-      
+      this.file = <File>event.target.files[0];      
       // image preview
       const reader = new FileReader();
       reader.onload = (e) => this.photoSelected = reader.result as string;
@@ -47,10 +49,15 @@ export class RegistroEmpleadosPage implements OnInit {
   obtenerAreas(){
     this.areaS.obtenerAreas().subscribe((res: any)=>{
      this.areas = res.cont
-      console.log(this.areas);
       
-    },err=>{
-      console.log(err);
+    },async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'close-circle'
+      })
+      await toast.present();
       
     })
   }
@@ -65,11 +72,24 @@ export class RegistroEmpleadosPage implements OnInit {
     nuevoUsuario.append('tipoEmpleado', this.usuario.tipoEmpleado)
     nuevoUsuario.append('imgPerfil', this.file)
 
-    this.personalS.crearPersonal(nuevoUsuario).subscribe((res:any)=>{
-      console.log(res);
+    this.personalS.crearPersonal(nuevoUsuario).subscribe(async(res:any)=>{
+      const toast = await this.toastController.create({
+        message: 'Creado con exito',
+        duration: 1000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
+
       
-    },err=>{
-      console.log(err);
+    },async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'close-circle'
+      })
+      await toast.present()
       
     })
     

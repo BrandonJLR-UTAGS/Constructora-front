@@ -36,7 +36,7 @@ export class LoginPage implements OnInit {
         icon: 'checkbox'
       })
       await toast.present();
-      if(personal.user.tipoEmpleado == 'Jefe' || personal.user.tipoEmpleado == 'jefe'){
+      if(personal.user.tipoEmpleado == 'Jefe' || personal.user.tipoEmpleado == 'jefe' || personal.user.tipoEmpleado == 'JefeSupremo'){
         this.router.navigate(['/home'])
       }else{
         this.router.navigate(['/tabs-trabajador/tareas'])

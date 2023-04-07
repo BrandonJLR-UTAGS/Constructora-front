@@ -3,6 +3,12 @@
     <ion-title>
       {{tittle}}
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        Salir
+        <ion-icon slot="end" name="log-out-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +27,7 @@
         </div>
       </div>
     </div>
-    <ion-button slot="fixed"><ion-icon name="add-outline"></ion-icon></ion-button>
+    <ion-button slot="fixed" routerLink="/registro-proyectos"><ion-icon name="add-outline"></ion-icon></ion-button>
   </div>
 </ion-content>
 

@@ -39,7 +39,6 @@ export class ProyectosPage implements OnInit{
           icon: 'checkbox'
         })
         await toast.present();
-        console.log(this.proyectos);
         
       },async(err)=> {
         const toast = await this.toastController.create({
@@ -82,6 +81,9 @@ export class ProyectosPage implements OnInit{
     this.router.navigate(['/proyecto-info', id])
   }
 
-
+  logout(){
+    localStorage.clear()
+    this.router.navigate(['/'])
+  }
 
 }

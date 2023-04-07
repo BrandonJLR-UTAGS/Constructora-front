@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectosService } from "../Services/proyectos.service";
 import { AreaService } from "../Services/area.service";
 import { PersonalService } from "../Services/personal.service";
+import { ToastController } from '@ionic/angular';
+
 
 import {
   ApexAxisChartSeries,
@@ -66,7 +68,8 @@ export class ProyectoInfoPage implements OnInit {
     private aRouter: ActivatedRoute,
     public proyectoS:ProyectosService,
     public areaS: AreaService,
-    public personalS: PersonalService
+    public personalS: PersonalService,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -81,31 +84,56 @@ export class ProyectoInfoPage implements OnInit {
       this.proyectoS.estadisticaPorProyecto(this.id).subscribe((res:any)=>{
         this.estadisticas.push(res.ManoObra)
         this.estadisticas.push(res.ganancias)
-        this.estadisticas.push(res.materialesEsperados)
-
-        console.log(this.estadisticas);
-        
-      },err=>{console.log(err)})
+        this.estadisticas.push(res.materialesEsperados)        
+      },async(err)=>{
+        const toast = await this.toastController.create({
+          message: err.error.msg,
+          duration: 2000,
+          position: 'bottom',
+          icon: 'close-circle'
+        })
+        await toast.present()
+      })
 
       this.proyectoS.obtenerProyectoId(this.id).subscribe((res:any)=>{
         this.informacion = res.cont
-        console.log(this.informacion);
         
         this.areaS.obtenerAreaID(this.informacion.areaAsginada).subscribe((res:any)=>{
           this.area = res.cont
-          console.log(this.area);
           
-        },err=>{console.log(err)})
+        },async(err)=>{
+          const toast = await this.toastController.create({
+            message: err.error.msg,
+            duration: 2000,
+            position: 'bottom',
+            icon: 'close-circle'
+          })
+          await toast.present()
+        })
 
         this.informacion.personasCargo.forEach(element=>{
           this.personalS.obtenerPersonalId(element).subscribe((res:any)=>{
             this.nombreJefes.push(res.cont.nombre)
-          },err=>{console.log(err)})
+          },async(err)=>{
+            const toast = await this.toastController.create({
+            message: err.error.msg,
+            duration: 2000,
+            position: 'bottom',
+            icon: 'close-circle'
+          })
+          await toast.present()
         })
-        console.log(this.nombreJefes);
-        
+        })        
       })
-    },err=>{console.log(err)})
+    },async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 2000,
+        position: 'bottom',
+        icon: 'close-circle'
+      })
+      await toast.present()
+    })
   }
 
   chart(){

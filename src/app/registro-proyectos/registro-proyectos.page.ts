@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PersonalService } from "../Services/personal.service";
 import { AreaService } from "../Services/area.service";
 import { ProyectosService } from '../Services/proyectos.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro-proyectos',
@@ -32,7 +33,11 @@ export class RegistroProyectosPage implements OnInit {
       _id: ''
     }
   }
-  constructor(public personalS: PersonalService, public areaS: AreaService, public proyectoS: ProyectosService) {
+  constructor(
+    public personalS: PersonalService, 
+    public areaS: AreaService, 
+    public proyectoS: ProyectosService,
+    private toastController: ToastController) {
   }
 
   ngOnInit() {
@@ -48,35 +53,26 @@ export class RegistroProyectosPage implements OnInit {
 
   mostrarNombreJefes(){
     this.nombreJefes=[]
-    console.log(this.jefes);
     this.jefes.forEach(element=>{
       this.nombreJefes.push(element.nombre)
       this.idsJefes.push(element._id)
     })
-    console.log(this.nombreJefes);
   }
 
   obtenerJefes(){
     this.personalS.obtenerPersonalJefe().subscribe((res:any)=>{
       this.jefes = res.cont
-      console.log(res);
-      
     })
   }
 
   obtenerAreas(){
     this.areaS.obtenerAreas().subscribe((res: any)=>{
-      this.area = res.cont
-      console.log(this.nombreArea);
-      
-      console.log(res);
-      
+      this.area = res.cont 
     })
   }
   onPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.file = <File>event.target.files[0];
-      console.log(this.file);
       
       // image preview
       const reader = new FileReader();
@@ -99,17 +95,24 @@ export class RegistroProyectosPage implements OnInit {
     }
     nuevoProyecto.append('areaAsginada', this.idArea)
     nuevoProyecto.append('image', this.file)
-
-    nuevoProyecto.forEach(element=>{
-      console.log(element);
-      
-    })
     
-    this.proyectoS.crearProyecto(nuevoProyecto).subscribe((res:any)=>{
-      console.log(res);
+    this.proyectoS.crearProyecto(nuevoProyecto).subscribe( async(res:any)=>{
+      const toast = await this.toastController.create({
+        message: 'Creado con exito',
+        duration: 1000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
       
-    },err=>{
-      console.log(err);
+    }, async(err)=>{
+      const toast = await this.toastController.create({
+        message: err.error.msg,
+        duration: 1000,
+        position: 'bottom',
+        icon: 'checkbox'
+      })
+      await toast.present();
       
     })
     
