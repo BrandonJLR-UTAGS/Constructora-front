@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
@@ -47,10 +48,19 @@ const routes: Routes = [
   {
     path: 'crear-area',
     loadChildren: () => import('./crear-area/crear-area.module').then( m => m.CrearAreaPageModule)
-  },  {
+  },
+  {
     path: 'tabs-trabajador',
     loadChildren: () => import('./tabs-trabajador/tabs-trabajador.module').then( m => m.TabsTrabajadorPageModule)
   },
+   {
+    path: 'resumen-proyecto',
+    loadChildren: () => import('./resumen-proyecto/resumen-proyecto.module').then( m => m.ResumenProyectoPageModule)
+  },
+  {
+    path: 'cronograma',
+    loadChildren: () => import('./cronograma/cronograma.module').then( m => m.CronogramaPageModule)
+  }
 
 
 
@@ -64,3 +74,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
