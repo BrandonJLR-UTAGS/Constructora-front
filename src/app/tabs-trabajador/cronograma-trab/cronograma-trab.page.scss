@@ -18,7 +18,7 @@ ion-content {
         scroll-snap-type: x proximity;
         table {
             margin: 15px auto 15px auto;
-            width: 200%;
+            width: 125%;
             min-height: 100%;
             border: 1px solid black;
             border-collapse: collapse;
@@ -49,21 +49,6 @@ ion-content {
                 }
             }
     
-        }
-    }
-    .buttons{
-        text-align: center;
-        ion-button{
-            margin-bottom: 40px;
-            --background: #3D0948;
-            --border-radius: 22px;
-            --color: #CAC9CB;
-            font-size: 13px;
-            width: 250px;
-            height: 41px;
-            ion-icon{
-                font-size: 20px;
-            }
         }
     }
 }

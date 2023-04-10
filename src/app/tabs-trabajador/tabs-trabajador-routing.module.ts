@@ -14,13 +14,17 @@ const routes: Routes = [
       },
       {
         path: 'cronograma',
-        loadChildren: () => import('../tab2/tab2.module').then(m=> m.Tab2PageModule)
+        loadChildren: () => import('./cronograma-trab/cronograma-trab.module').then( m=> m.CronogramaTrabPageModule)
       },
       {
         path: 'Cuenta',
         loadChildren: () => import('../tab4/tab4.module').then(m=> m.Tab4PageModule)
       }
     ]
+  },
+  {
+    path: 'cronograma-trab',
+    loadChildren: () => import('./cronograma-trab/cronograma-trab.module').then( m => m.CronogramaTrabPageModule)
   }
   
 ];
