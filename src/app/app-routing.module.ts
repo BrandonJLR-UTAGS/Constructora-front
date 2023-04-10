@@ -53,19 +53,10 @@ const routes: Routes = [
     path: 'tabs-trabajador',
     loadChildren: () => import('./tabs-trabajador/tabs-trabajador.module').then( m => m.TabsTrabajadorPageModule)
   },
-   {
-    path: 'resumen-proyecto',
-    loadChildren: () => import('./resumen-proyecto/resumen-proyecto.module').then( m => m.ResumenProyectoPageModule)
-  },
   {
-    path: 'cronograma',
+    path: 'cronograma/:id',
     loadChildren: () => import('./cronograma/cronograma.module').then( m => m.CronogramaPageModule)
   }
-
-
-
-
-
 ];
 @NgModule({
   imports: [

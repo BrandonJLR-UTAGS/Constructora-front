@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ProyectosService } from "../Services/proyectos.service";
+import { PersonalService } from "../Services/personal.service";
+import { AreaService } from "../Services/area.service";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cronograma',
@@ -7,22 +11,72 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CronogramaPage implements OnInit {
 
-  datos = [
-
-    {numero:"1", nombre: "ACT 1", p_r: "p", s1: "1", s2: "1", area: "area 1", persona:"Juan" },
-    {numero:"2", nombre: "ACT 2", p_r: "p", s1: "1", s2: "1", area: "area 2", persona:"Enrique" },
-    {numero:"3", nombre: "ACT 3", p_r: "p", s1: "1", s2: "1", area: "area 3", persona:"Mark" },
-    {numero:"4", nombre: "ACT 4", p_r: "p", s1: "1", s2: "1", area: "area 4", persona:"T800" },
-
-  ];
-
-
-
-
-
-  constructor() { }
-
-  ngOnInit() {
+  id = ''
+  semanas = []
+  proyecto = {
+    nombre: '',
+  imgProyecto: '',
+  descripcion:'',
+  presupuestoTotal:0,
+  manoObra:0,
+  materialesEsperados:0,
+  tiempoProyectoSemanas:0,
+  personasCargo:[],
+  areaAsginada:'',
+  tareasTotales:[]
   }
 
+  tareasInfo = []
+
+  // {
+  //   nombre:'',
+  //   prioridad:'',
+  //   area:'',
+  //   personaAsginada:'',
+  //   semanasEsperadasNumber:0,
+  //   fechaLimiteDate:0,
+  //   detalles:'',
+  //   adjuntos:[],
+  //   completada: true
+  // }
+  constructor(
+    public proyectoS: ProyectosService, 
+    private arouter: ActivatedRoute,
+    public personalS: PersonalService,
+    public areaS: AreaService,
+    public router: Router) { }
+
+  ngOnInit() {
+    this.obtenerProyectoYTarea()
+  }
+
+  obtenerProyectoYTarea(){
+    this.arouter.params.subscribe(params=>{
+      this.id = params['id']
+
+      this.proyectoS.obtenerProyectoId(this.id).subscribe((res:any)=>{
+        this.proyecto = res.cont        
+        this.semanas = Array(this.proyecto.tiempoProyectoSemanas).fill(0).map((x,i)=>i)  
+        
+        
+      },async(err)=>{
+        console.log(err);
+      })
+
+      this.proyectoS.obtenerTareasProyecto(this.id).subscribe((res:any)=>{
+        this.tareasInfo = res.cont
+        console.log(this.tareasInfo);
+        
+      },async(err)=>{
+        console.log(err);
+        
+      })
+
+
+    })
+  }
+
+  toTask(){
+    this.router.navigate(['home/tabs/tab2'])
+  }
 }

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>proyecto-info</ion-title>
+    <ion-title>{{informacion.nombre}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,7 +26,7 @@
       <h3>
         Cronograma de Actividades
       </h3>
-      <div id="cronograma">
+      <div id="cronograma" (click)="toCronograma()">
         <div class="proyecto">
           <div class="cuadrado">
             <h1>Ver</h1>

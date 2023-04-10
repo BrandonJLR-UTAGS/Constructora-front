@@ -20,7 +20,7 @@ import {
   ApexXAxis,
   ApexYAxis,
 } from 'ng-apexcharts';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export type ChartOptions = {
   chart: ApexChart;
@@ -66,6 +66,7 @@ export class ProyectoInfoPage implements OnInit {
   public options: Partial<ChartOptions>
   constructor(
     private aRouter: ActivatedRoute,
+    private router: Router,
     public proyectoS:ProyectosService,
     public areaS: AreaService,
     public personalS: PersonalService,
@@ -145,6 +146,10 @@ export class ProyectoInfoPage implements OnInit {
       labels: ['Mano de obra', 'Ganancias', 'Materiales esperados'],
       colors: ['#8D8D8D', '#328D23', '#DB1C1C']
     }
+  }
+
+  toCronograma(){
+    this.router.navigate(['/cronograma', this.id])
   }
 
 }

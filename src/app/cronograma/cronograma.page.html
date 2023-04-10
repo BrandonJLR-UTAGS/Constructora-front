@@ -11,7 +11,39 @@
 
 
 <ion-content>
-  <div>
+  <table>
+    <thead>
+      <th>No.</th>
+      <th>Nombre de la actividad</th>
+      <th>P R</th>
+      <th *ngFor="let semana of semanas">S{{semana+1}}</th>
+      <th>Area</th>
+      <th>Persona asignada</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarea of tareasInfo; let i = index">
+        <td>
+          {{i+1}}
+        </td>
+        <td>
+          {{tarea.nombre}}
+        </td>
+        <td>
+          P R
+        </td>
+        <td *ngFor="let semana of semanas">
+
+        </td>
+        <td>
+          {{tarea.area.nombre}}
+        </td>
+        <td>
+          {{tarea.personaAsginada.nombre}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <div>
     <table>
 
       <body>
@@ -43,19 +75,16 @@
 
     </table>
 
+  </div> -->
+  <div class="buttons">
+    <ion-button (click)="toTask()">
+      Crear Tarea
+    </ion-button>
   </div>
-
-
 </ion-content>
 
 
-<div class="buttons">
 
-  <ion-button [routerLink]="['../home/tabs/tab2']">
-    Crear Tarea
-  </ion-button>
-
-</div>
 
 
 

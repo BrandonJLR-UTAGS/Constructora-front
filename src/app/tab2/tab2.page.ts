@@ -100,9 +100,12 @@ export class Tab2Page implements OnInit{
     nuevaTarea.append('semanasEsperadas', this.tarea.semanasEsperadas)
     nuevaTarea.append('fechaLimite', this.tarea.fechaLimite)
     nuevaTarea.append('detalles', this.tarea.detalles)
-    for (let i = 0; i < this.files.length; i++) {
-      nuevaTarea.append('archivo', this.files[i])      
+    if(this.files){
+      for (let i = 0; i < this.files.length; i++) {
+        nuevaTarea.append('archivo', this.files[i])      
+      }
     }
+    
     
     this.tareaS.crearTarea(nuevaTarea).subscribe(async(res:any)=>{
       const toast = await this.toastController.create({

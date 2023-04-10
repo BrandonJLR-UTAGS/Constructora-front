@@ -44,7 +44,6 @@ export class ProyectosService {
   }
 
   crearProyecto(data){
-// TODO hacer el codigo adecuado
     return this.http.post(`${this.url}/crearProyecto`, data)
   }
 
